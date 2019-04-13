@@ -93,7 +93,7 @@ unsigned char find_mean(unsigned char array[], unsigned int length);
  *
  * Selection sort is used despite its O(n^2) runtime because it has a 
  * spatial complexity of O(1) and that is more important in this 
- * embedded system context.
+ * embedded system context (limited memory).
  *
  * @param array An array of unsigned chars
  * @param length The length of the array
