@@ -38,7 +38,7 @@ TARGET = c1m2
 
 ifeq ($(PLATFORM), MSP432)
 	# Architectures Specific Flags
-	LINKER_FILE = -T ../msp432p401r.lds 
+	LINKER_FILE = -T msp432p401r.lds 
 	CPU = cortex-m4
 	ARCH = armv7e-m
 	SPECS = nosys.specs
@@ -50,7 +50,7 @@ ifeq ($(PLATFORM), MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	CFLAGS = $(GEN_FLAGS) $(EXTRA) -mcpu=$(CPU) -m$(ARCH) --specs=$(SPECS)
-	LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
+	LDFLAGS = -Wl,-Map=$(TARGET).map -T -L ../ $(LINKER_FILE)
 	CPPFLAGS = -DMSP432 $(INCLUDES)
 
 	# Architecture specific source codes
@@ -87,7 +87,6 @@ PREP = $(SRCS:.c=.i)
 compile-all: $(OBJS)
 
 .PHONY: Build
-build: $(DEPS)
 build: $(TARGET).out
 
 $(TARGET).out: $(OBJS)
