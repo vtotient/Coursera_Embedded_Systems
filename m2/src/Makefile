@@ -10,15 +10,25 @@
 #*****************************************************************************
 
 #------------------------------------------------------------------------------
-# <Put a Description Here>
+# Simple make file to support two build platforms
 #
 # Use: make [TARGET] [PLATFORM-OVERRIDES]
 #
 # Build Targets:
-#      <Put a description of the supported targets here>
+#      <FILE>.o - Builds a <FILE>.o object file
+#      <FILE>.i - Builds a <FILE>.i preprocessed file
+#      <FILE>.asm - Dumps <FILE>.asm assembly file
+#      <FILE>.d - Builds <FILE>.d dependency file
+#      compile-all - Compiles all source files in project
+#      build - Builds all object files in project (links as well)
+#      clean - Removes all generated files
 #
 # Platform Overrides:
-#      <Put a description of the supported Overrides here
+#      HOST - Default platform
+#      MSP342 - Target cross-compiled platform
+#
+# Author: vtotient
+# Date:   April 13, 2019
 #
 #------------------------------------------------------------------------------
 include sources.mk
