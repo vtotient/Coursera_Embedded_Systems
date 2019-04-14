@@ -49,7 +49,7 @@ ifeq ($(PLATFORM), MSP432)
 	# Compiler Flags and Defines
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
-	CFLAGS = $(GEN_FLAGS) $(EXTRA) -mcpu=$(CPU) -m$(ARCH) --specs=$(SPECS)
+	CFLAGS = $(GEN_FLAGS) $(EXTRA) -mcpu=$(CPU) -march=$(ARCH) --specs=$(SPECS)
 	LDFLAGS = -Wl,-Map=$(TARGET).map -T -L ../ $(LINKER_FILE)
 	CPPFLAGS = -DMSP432 $(INCLUDES)
 
@@ -60,6 +60,8 @@ ifeq ($(PLATFORM), MSP432)
 		 interrupts_msp432p401r_gcc.c \
 		 startup_msp432p401r_gcc.c \
 		 system_msp432p401r.c
+	
+	SIZE = arm-none-eabi-size
 
 else
 	# Complier Flags and Defines
@@ -67,6 +69,7 @@ else
 	CFLAGS = $(GEN_FLAGS)
 	CPPFLAGS = -DHOST $(INCLUDES)
 	LDFLAGS = -Wl,-Map=$(TARGET).map
+	SIZE = size
 endif
 
 OBJS = $(SRCS:.c=.o)
@@ -74,14 +77,17 @@ DEPS = $(SRCS:.c=.d)
 ASMS = $(SRCS:.c=.asm)
 PREP = $(SRCS:.c=.i)
 
-%o: %.c
+%.o: %.c
 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
 
-%asm: %.c
+%.asm: %.c
 	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@
 
-%i: %.c
+%.i: %.c
 	$(CC) -E $< $(CPPFLAGS) -o $@
+
+%.d: %.c
+	$(CC) -E -M $< $(CPPFLAGS) -o $@
 
 .PHONY: compile-all
 compile-all: $(OBJS)
@@ -91,6 +97,7 @@ build: $(TARGET).out
 
 $(TARGET).out: $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
+	$(SIZE) $@
 
 .PHONY: Clean
 clean:
