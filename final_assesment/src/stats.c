@@ -23,15 +23,15 @@
 #define SIZE (40)
 
 void print_statistics(unsigned char array[], unsigned int length){
-	printf("The original array:\n\n");
+	PRINTF("The original array:\n\n");
 	print_array(array, length);
 	sort_array(array, length);
-	printf("The Sorted array:\n");
+	PRINTF("The Sorted array:\n");
 	print_array(array, length);
-	printf("The Median is: %d\n", find_median(array, length));
-	printf("The Mean is: %d\n", find_mean(array, length));
-	printf("The Max is: %d\n", find_max(array, length));
-	printf("The Min is: %d\n\n", find_min(array, length));	
+	PRINTF("The Median is: %d\n", find_median(array, length));
+	PRINTF("The Mean is: %d\n", find_mean(array, length));
+	PRINTF("The Max is: %d\n", find_max(array, length));
+	PRINTF("The Min is: %d\n\n", find_min(array, length));	
 	return;
 }
 
@@ -39,12 +39,12 @@ void print_array(unsigned char array[], unsigned int length){
 	#ifdef VERBOSE
 	for(int i = 0; i < length/8; i++){
 		for(int j = 0; j < length/5; j++){
-		       printf("%3d  ", array[8*i+j]);
+		       PRINTF("%3d  ", array[8*i+j]);
 		}
- 		printf("\n");
+ 		PRINTF("\n");
 	}
 	
-	printf("\n");	
+	PRINTF("\n");	
 	
 	#endif
 
