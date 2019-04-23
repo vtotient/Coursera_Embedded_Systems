@@ -74,12 +74,10 @@ ifeq ($(PLATFORM), MSP432)
 	CPPFLAGS = -DMSP432 $(INCLUDES)
 
 	# Architecture specific source codes
-	SOURCE = \
-		 main.c \
-		 memory.c \
+	SRCS += \
 		 interrupts_msp432p401r_gcc.c \
 		 startup_msp432p401r_gcc.c \
-		 system_msp432p401r.c
+		 system_msp432p401r.c \
 	
 	SIZE = arm-none-eabi-size
 

@@ -11,7 +11,10 @@
 
 # Source Paths
 SRCS =  main.c \
+	data.c \
+	course1.c \
 	memory.c \
+	stats.c
 
 # Include Paths
 INCLUDES = -I ../include/common \
