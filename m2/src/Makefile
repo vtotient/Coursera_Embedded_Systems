@@ -64,7 +64,7 @@ ifeq ($(PLATFORM), MSP432)
 	CPPFLAGS = -DMSP432 $(INCLUDES)
 
 	# Architecture specific source codes
-	SOURCE = \
+	SRCS = \
 		 main.c \
 		 memory.c \
 		 interrupts_msp432p401r_gcc.c \
@@ -80,6 +80,11 @@ else
 	CPPFLAGS = -DHOST $(INCLUDES)
 	LDFLAGS = -Wl,-Map=$(TARGET).map
 	SIZE = size
+	
+	# Source files for the HOST target
+	SRCS = \
+		 main.c \
+		 memory.c
 endif
 
 OBJS = $(SRCS:.c=.o)
